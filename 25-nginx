@@ -8,6 +8,7 @@ fi
 # Copy servers from configuration
 if [ -d /config/servers ]; then
     echo "Generating server configurations..."
+    mkdir /etc/nginx/servers
     cp /config/servers/generate /etc/nginx/servers/generate
     pushd /etc/nginx/servers
     ./generate
