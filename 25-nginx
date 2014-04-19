@@ -7,8 +7,12 @@ fi
 
 # Copy servers from configuration
 if [ -d /config/servers ]; then
-    echo "Copying server configurations..."
-    cp -Rv /config/servers /etc/nginx/servers
+    echo "Generating server configurations..."
+    cp /config/servers/generate /etc/nginx/servers/generate
+    pushd /etc/nginx/servers
+    ./generate
+    popd
+    rm generate
 fi
 
 if [ -d /config/certs ]; then
