@@ -63,7 +63,7 @@ Here is an example script that you can change for your own needs:
     }
     
     EOF
-    
+
 The other critical step is linking the containers together correctly.  The example above assumes that this container has been run with the following command:
 
     /usr/bin/docker run -p 80:80 -p 443:443 -v /path/to/autoproxy/config:/config --name=autoproxy --link example.com:linked_example_com --link another.com:linked_another_com hachque/nginx-autoproxy
