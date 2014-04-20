@@ -80,7 +80,7 @@ What do these parameters do?
     
 Note that the names `linked_example_com` and `linked_another_com` directly corrospond to the variables names used in the `generate` script.
 
-A systemd configuration file may look like:
+This image is intended to be used in such a way that a new container is created each time it is started, instead of starting and stopping a pre-existing container from this image.  You should configure your service startup so that the container is stopped and removed each time.  A systemd configuration file may look like:
     
     [Unit]
     Description=Nginx proxy for main sites
