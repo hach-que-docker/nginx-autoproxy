@@ -7,6 +7,8 @@ This image requires a reasonable amount of preconfiguration, in that you need to
 
 To configure this image, create a `config` directory, with a `servers` directory inside it and a `generate` script inside that.  It should be mapped in such a way that in the container, `/config/servers/generate` exists and is executable.
 
+**WARNING:** Do not reverse proxy to SSL ports. There are known issues with downloading files and reverse proxying to an SSL port, so you should just use port 80 instead. In this scenario, the reverse proxy still offers SSL to the end-user, but uses plain HTTP while routing to the other Docker instances.
+
 Here is an example script that you can change for your own needs:
 
     #!/bin/bash
@@ -34,7 +36,8 @@ Here is an example script that you can change for your own needs:
         ssl_prefer_server_ciphers   on;
     
         location / {
-            proxy_pass https://${LINKED_EXAMPLE_COM_PORT_443_TCP_ADDR}:${LINKED_EXAMPLE_COM_PORT_443_TCP_PORT};
+            # Note that this is HTTP on port 80 and NOT SSL!
+            proxy_pass http://${LINKED_EXAMPLE_COM_PORT_80_TCP_ADDR}:${LINKED_EXAMPLE_COM_PORT_80_TCP_PORT};
             include reverse.inc;
         }
     }
