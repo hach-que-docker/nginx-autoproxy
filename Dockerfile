@@ -17,5 +17,9 @@ ADD reverse.inc /etc/nginx/reverse.inc
 ADD mime.types /etc/nginx/mime.types
 ADD 25-nginx /etc/init.simple/25-nginx
 
+# Create nginx user and group
+RUN echo "nginx:x:497:495:user for nginx:/var/lib/nginx:/bin/false" >> /etc/passwd
+RUN echo "nginx:!:495:" >> /etc/group
+
 # Set /init as the default
 CMD ["/init"]
